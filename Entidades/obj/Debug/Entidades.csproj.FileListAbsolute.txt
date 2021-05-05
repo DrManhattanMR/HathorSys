@@ -1,0 +1,6 @@
+C:\ManfredDevelopment\HathorSystem\HathorSystem\Entidades\bin\Debug\Entidades.dll
+C:\ManfredDevelopment\HathorSystem\HathorSystem\Entidades\bin\Debug\Entidades.pdb
+C:\ManfredDevelopment\HathorSystem\HathorSystem\Entidades\obj\Debug\Entidades.csprojAssemblyReference.cache
+C:\ManfredDevelopment\HathorSystem\HathorSystem\Entidades\obj\Debug\Entidades.csproj.CoreCompileInputs.cache
+C:\ManfredDevelopment\HathorSystem\HathorSystem\Entidades\obj\Debug\Entidades.dll
+C:\ManfredDevelopment\HathorSystem\HathorSystem\Entidades\obj\Debug\Entidades.pdb
