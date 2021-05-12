@@ -16,7 +16,7 @@ namespace AccesoDatos
             try
             {
                 StringBuilder sentencia = new StringBuilder(" INSERT INTO CLIENTES ( ID_CLIENTE, NOMBRE, APEPAT, APEMAT, FECHANACIMIENTO, DIRECCION, CORREO, TELEFONO, FECHAALTA, FECHAMODIFICACION, PASSWORD, FOTO ) ");
-                sentencia.AppendLine(" VALUES ( @ID_CLIENTE, @NOMBRE, @APEPAT, @APEMAT, @FECHANACIMIENTO, @DIRECCION, @CORREO, @TELEFONO, @FECHAALTA, @FECHAMODIFICACION, @PASSWORD, @FOTO ) ");
+                sentencia.AppendLine(" VALUES ( @ID_CLIENTE, @NOMBRE, @APEPAT, @APEMAT, @FECHANACIMIENTO, @DIRECCION, @CORREO, @TELEFONO, CURDATE(), CURDATE(), @PASSWORD, @FOTO ) ");
                 MySqlCommand comando = ServiciosBD.ObtenerComando(conexion, sentencia.ToString());
                 comando.Parameters.Add(new MySqlParameter("ID_CLIENTE", entidad.IdCliente));
                 comando.Parameters.Add(new MySqlParameter("NOMBRE", entidad.Nombre));
@@ -26,8 +26,8 @@ namespace AccesoDatos
                 comando.Parameters.Add(new MySqlParameter("DIRECCION", entidad.Direccion));
                 comando.Parameters.Add(new MySqlParameter("CORREO", entidad.Correo));
                 comando.Parameters.Add(new MySqlParameter("TELEFONO", entidad.Telefono));
-                comando.Parameters.Add(new MySqlParameter("FECHAALTA", entidad.FechaAlta));
-                comando.Parameters.Add(new MySqlParameter("FECHAMODIFICACION", entidad.FechaModificacion));
+                //comando.Parameters.Add(new MySqlParameter("FECHAALTA", entidad.FechaAlta));
+                //comando.Parameters.Add(new MySqlParameter("FECHAMODIFICACION", entidad.FechaModificacion));
                 comando.Parameters.Add(new MySqlParameter("PASSWORD", entidad.Password));
                 comando.Parameters.Add(new MySqlParameter("FOTO", entidad.Foto));
                 return comando.ExecuteNonQuery() > 0;
