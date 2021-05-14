@@ -37,6 +37,8 @@ namespace Entidades
         public string Password { get; set; }
         [DataMember] 
         public byte[] Foto { get; set; }
+        [DataMember]
+        public string Sexo { get; set; }
         public Cliente()
         {
             Id = 0;
@@ -52,6 +54,7 @@ namespace Entidades
             FechaModificacion = DateTime.MinValue;
             Password = string.Empty;
             Foto = null;
+            Sexo = string.Empty;
         }
     }
     [CollectionDataContract]

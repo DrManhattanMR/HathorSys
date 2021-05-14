@@ -13,7 +13,17 @@ namespace LogicaNegocios
         public bool InsertarCliente(Cliente entidad)
         {
             ServicioCliente srv = new ServicioCliente();
-            return srv.InsertarCliente(entidad);
+            return srv.AgregarCliente(entidad);
+        }
+        public ListaCliente ObtenerClientes(string idCliente)
+        {
+            ServicioCliente srv = new ServicioCliente();
+            return srv.ObtenerClientes(idCliente);
+        }
+        public bool EliminarCliente(string idCliente)
+        {
+            ServicioCliente srv = new ServicioCliente();
+            return srv.EliminarCliente(idCliente);
         }
         #endregion Region
 

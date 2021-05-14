@@ -11,9 +11,24 @@ namespace RestHathor.Controllers
     public class ClienteController : ApiController
     {
         // GET: api/Cliente
-        public IEnumerable<string> Get()
+        public HttpResponseMessage Get(string idCliente)
         {
-            return new string[] { "value1", "value2" };
+            try
+            {
+                ServiciosLogica Srv = new ServiciosLogica();
+                ListaCliente Lista = Srv.ObtenerClientes(idCliente);
+                var response = Request.CreateResponse<IEnumerable<Cliente>>(HttpStatusCode.Created, Lista);
+                return response;
+            }
+            catch (Exception ex)
+            {
+                var resp = new HttpResponseMessage(HttpStatusCode.NotFound)
+                {
+                    Content = new StringContent(string.Format(ex.Message)),
+                    ReasonPhrase = "Error al Obtener Lista de Clientes: " + ex.Message.Replace("\n", "").Replace("\r", "")
+                };
+                throw new HttpResponseException(resp);
+            }
         }
 
         // GET: api/Cliente/5
@@ -49,8 +64,25 @@ namespace RestHathor.Controllers
         }
 
         // DELETE: api/Cliente/5
-        public void Delete(int id)
+        public bool Delete(string idCliente)
         {
+            try
+            {
+                ServiciosLogica logica = new ServiciosLogica();
+                return logica.EliminarCliente(idCliente);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = ex.Message;
+                var respuesta = new HttpResponseMessage(HttpStatusCode.NotFound)
+                {
+                    Content = new StringContent(string.Format(mensaje)),
+                    ReasonPhrase = "Error al Elimnar  Cliente: " + ex.Message.Replace("\n", "").Replace("\r", "")
+
+
+                };
+                throw new HttpResponseException(respuesta);
+            }
         }
     }
 }
