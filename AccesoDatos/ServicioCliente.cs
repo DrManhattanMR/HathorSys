@@ -147,5 +147,47 @@ namespace AccesoDatos
                 MySqlConnection.ClearPool(conexion);
             }
         }
+        public bool EditarCliente(Cliente entidad)
+        {
+            MySqlConnection conexion = ServiciosBD.ObtenerConexion();
+            try
+            {
+                //string Nombre = new System.Globalization.CultureInfo("es-ES", false).TextInfo.ToTitleCase(entidad.Nombre.ToLower());
+                //string ApellidoPaterno = new System.Globalization.CultureInfo("es-ES", false).TextInfo.ToTitleCase(entidad.ApellidoPaterno.ToLower());
+                //string ApellidoMaterno = new System.Globalization.CultureInfo("es-ES", false).TextInfo.ToTitleCase(entidad.ApellidoMaterno.ToLower());
+                //string idcliente = GetIdCliente(entidad);
+                StringBuilder sentencia = new StringBuilder(" UPDATE CLIENTES ");
+                sentencia.AppendLine(" SET NOMBRE = @NOMBRE, APEPAT = @APEPAT, APEMAT = @APEMAT, FECHANACIMIENTO = @FECHANACIMIENTO, ");
+                sentencia.AppendLine(" DIRECCION = @DIRECCION, CORREO = @CORREO, TELEFONO = @TELEFONO, FECHAMODIFICACION = CURDATE(), SEXO = @SEXO ");
+                sentencia.AppendLine(" WHERE ID_CLIENTE = @ID_CLIENTE ");
+                MySqlCommand comando = ServiciosBD.ObtenerComando(conexion, sentencia.ToString());
+                comando.Parameters.Add(new MySqlParameter("ID_CLIENTE", entidad.IdCliente));
+                comando.Parameters.Add(new MySqlParameter("NOMBRE", entidad.Nombre.Trim()));
+                comando.Parameters.Add(new MySqlParameter("APEPAT", entidad.ApellidoPaterno.Trim()));
+                comando.Parameters.Add(new MySqlParameter("APEMAT", entidad.ApellidoMaterno.Trim()));
+                comando.Parameters.Add(new MySqlParameter("FECHANACIMIENTO", entidad.FechaNacimiento));
+                comando.Parameters.Add(new MySqlParameter("DIRECCION", entidad.Direccion.Trim()));
+                comando.Parameters.Add(new MySqlParameter("CORREO", entidad.Correo.Trim().ToLower()));
+                comando.Parameters.Add(new MySqlParameter("TELEFONO", entidad.Telefono.Trim()));
+                //comando.Parameters.Add(new MySqlParameter("FECHAALTA", entidad.FechaAlta));
+                //comando.Parameters.Add(new MySqlParameter("FECHAMODIFICACION", entidad.FechaModificacion));
+                //comando.Parameters.Add(new MySqlParameter("PASSWORD", GetSHA256(entidad.Password.Trim())));
+                //comando.Parameters.Add(new MySqlParameter("FOTO", entidad.Foto));
+                comando.Parameters.Add(new MySqlParameter("SEXO", entidad.Sexo));
+                return comando.ExecuteNonQuery() > 0;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                conexion.Close();
+                MySqlConnection.ClearPool(conexion);
+                conexion.Dispose();
+
+            }
+        }
     }
 }

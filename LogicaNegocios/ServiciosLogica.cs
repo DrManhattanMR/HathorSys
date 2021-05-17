@@ -25,6 +25,11 @@ namespace LogicaNegocios
             ServicioCliente srv = new ServicioCliente();
             return srv.EliminarCliente(idCliente);
         }
+        public bool EditarCliente(Cliente entidad)
+        {
+            ServicioCliente srv = new ServicioCliente();
+            return srv.EditarCliente(entidad);
+        }
         #endregion Region
 
 

@@ -59,8 +59,24 @@ namespace RestHathor.Controllers
         }
 
         // PUT: api/Cliente/5
-        public void Put(int id, [FromBody]string value)
+        public bool Put([FromBody]Cliente entidad)
         {
+            try
+            {
+                ServiciosLogica srv = new ServiciosLogica();
+                return srv.EditarCliente(entidad);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = ex.Message;
+
+                var resp = new HttpResponseMessage(HttpStatusCode.NotFound)
+                {
+                    Content = new StringContent(string.Format(mensaje)),
+                    ReasonPhrase = "Error al Editar Cliente : " + mensaje.Replace("\n", "").Replace("\r", "")
+                };
+                throw new HttpResponseException(resp);
+            }
         }
 
         // DELETE: api/Cliente/5
